@@ -4,6 +4,11 @@
 ;;     Copyright (C) 2003  Eric Marsden, Luke Gorrie, Helmut Eller
 ;;     Copyright (C) 2004,2005,2006  Luke Gorrie, Helmut Eller
 ;;     Copyright (C) 2007,2008,2009  Helmut Eller, Tobias C. Rittweiler
+;; Authors: Eric Marsden, Luke Gorrie, Helmut Eller, Tobias C. Rittweiler
+;; URL: http://common-lisp.net/project/slime/
+;; Version: 20091016
+;; Keywords: languages, lisp, slime
+;;
 ;;
 ;;     For a detailed list of contributors, see the manual.
 ;;
