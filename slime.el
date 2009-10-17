@@ -88,16 +88,18 @@ This is used to load the supporting Common Lisp library, Swank.
 The default value is automatically computed from the location of the
 Emacs Lisp package."))
 
-(defvar slime-lisp-modes '(lisp-mode))
-(defvar slime-setup-contribs nil)
+;;;###autoload
+(progn
+  (defvar slime-lisp-modes '(lisp-mode))
+  (defvar slime-setup-contribs nil)
 
-(defun slime-setup (&optional contribs)
-  "Setup Emacs so that lisp-mode buffers always use SLIME.
+  (defun slime-setup (&optional contribs)
+    "Setup Emacs so that lisp-mode buffers always use SLIME.
 CONTRIBS is a list of contrib packages to load."
-  (when (member 'lisp-mode slime-lisp-modes)
-    (add-hook 'lisp-mode-hook 'slime-lisp-mode-hook))
-  (setq slime-setup-contribs contribs)
-  (slime-setup-contribs))
+    (when (member 'lisp-mode slime-lisp-modes)
+      (add-hook 'lisp-mode-hook 'slime-lisp-mode-hook))
+    (setq slime-setup-contribs contribs)
+    (slime-setup-contribs)))
 
 (defun slime-setup-contribs ()
   "Load and initialize contribs."
@@ -109,6 +111,7 @@ CONTRIBS is a list of contrib packages to load."
         (when (fboundp init)
           (funcall init))))))
 
+;;;###autoload
 (defun slime-lisp-mode-hook ()
   (slime-mode 1)
   (set (make-local-variable 'lisp-indent-function)
@@ -380,6 +383,7 @@ PROPERTIES specifies any default face properties."
 
 ;;;;; slime-mode
 
+;;;###autoload
 (define-minor-mode slime-mode
   "\\<slime-mode-map>\
 SLIME: The Superior Lisp Interaction Mode for Emacs (minor-mode).
@@ -1216,6 +1220,7 @@ See `slime-lisp-implementations'")
 (defvar slime-net-processes)
 (defvar slime-default-connection)
 
+;;;###autoload
 (defun slime (&optional command coding-system)
   "Start an inferior^_superior Lisp and connect to its Swank server."
   (interactive)
@@ -1304,6 +1309,7 @@ The rules for selecting the arguments are rather complicated:
 (defun slime-start* (options)
   (apply #'slime-start options))
 
+;;;###autoload
 (defun slime-connect (host port &optional coding-system)
   "Connect to a running Swank server. Returns the connection."
   (interactive (list (read-from-minibuffer "Host: " slime-lisp-host)
@@ -4659,6 +4665,7 @@ If PACKAGE is NIL, then search in all packages."
 
 ;;;; Documentation
 
+;;;###autoload
 (defun slime-hyperspec-lookup (symbol-name)
   "A wrapper for `hyperspec-lookup'"
   (interactive (list (let* ((symbol-at-point (slime-symbol-at-point))
