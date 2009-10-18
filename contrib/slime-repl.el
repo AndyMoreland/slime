@@ -6,6 +6,8 @@
 ;; URL: http://common-lisp.net/project/slime/
 ;; Version: 20091016
 ;; Keywords: languages, lisp, slime
+;; Package-Requires: ((slime "20091016"))
+;; Adapted-by: Phil Hagelberg
 ;;
 ;;; Description:
 ;;

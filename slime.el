@@ -8,7 +8,7 @@
 ;; URL: http://common-lisp.net/project/slime/
 ;; Version: 20091016
 ;; Keywords: languages, lisp, slime
-;;
+;; Adapted-by: Phil Hagelberg
 ;;
 ;;     For a detailed list of contributors, see the manual.
 ;;
@@ -27,7 +27,6 @@
 ;;     Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
 ;;     MA 02111-1307, USA.
 ;;
-;; Packaged for ELPA by Phil Hagelberg
 
  
  ;;;; Commentary
