@@ -1,31 +1,33 @@
- ;;; slime.el --- Superior Lisp Interaction Mode for Emacs
- ;;
- ;;;; License
- ;;     Copyright (C) 2003  Eric Marsden, Luke Gorrie, Helmut Eller
- ;;     Copyright (C) 2004,2005,2006  Luke Gorrie, Helmut Eller
- ;;     Copyright (C) 2007,2008,2009  Helmut Eller, Tobias C. Rittweiler
- ;; Authors: Eric Marsden, Luke Gorrie, Helmut Eller, Tobias C. Rittweiler
- ;; URL: http://common-lisp.net/project/slime/
- ;; Version: 20091016
- ;; Keywords: languages, lisp, slime
- ;;
- ;;
- ;;     For a detailed list of contributors, see the manual.
- ;;
- ;;     This program is free software; you can redistribute it and/or
- ;;     modify it under the terms of the GNU General Public License as
- ;;     published by the Free Software Foundation; either version 2 of
- ;;     the License, or (at your option) any later version.
- ;;
- ;;     This program is distributed in the hope that it will be useful,
- ;;     but WITHOUT ANY WARRANTY; without even the implied warranty of
- ;;     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- ;;     GNU General Public License for more details.
- ;;
- ;;     You should have received a copy of the GNU General Public
- ;;     License along with this program; if not, write to the Free
- ;;     Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
- ;;     MA 02111-1307, USA.
+;;; slime.el --- Superior Lisp Interaction Mode for Emacs
+;;
+;;;; License
+;;     Copyright (C) 2003  Eric Marsden, Luke Gorrie, Helmut Eller
+;;     Copyright (C) 2004,2005,2006  Luke Gorrie, Helmut Eller
+;;     Copyright (C) 2007,2008,2009  Helmut Eller, Tobias C. Rittweiler
+;; Authors: Eric Marsden, Luke Gorrie, Helmut Eller, Tobias C. Rittweiler
+;; URL: http://common-lisp.net/project/slime/
+;; Version: 20091016
+;; Keywords: languages, lisp, slime
+;;
+;;
+;;     For a detailed list of contributors, see the manual.
+;;
+;;     This program is free software; you can redistribute it and/or
+;;     modify it under the terms of the GNU General Public License as
+;;     published by the Free Software Foundation; either version 2 of
+;;     the License, or (at your option) any later version.
+;;
+;;     This program is distributed in the hope that it will be useful,
+;;     but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+;;     GNU General Public License for more details.
+;;
+;;     You should have received a copy of the GNU General Public
+;;     License along with this program; if not, write to the Free
+;;     Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
+;;     MA 02111-1307, USA.
+;;
+;; Packaged for ELPA by Phil Hagelberg
 
  
  ;;;; Commentary
@@ -103,7 +105,6 @@
  CONTRIBS is a list of contrib packages to load."
      (when (member 'lisp-mode slime-lisp-modes)
        (add-hook 'lisp-mode-hook 'slime-lisp-mode-hook))
-     ;; TODO: preserve existing value so slime-setup can be called many times
      (setq slime-setup-contribs contribs)
      (slime-setup-contribs)))
 
@@ -125,15 +126,12 @@
 
  (eval-and-compile
    (defun slime-changelog-date ()
-     "Return the datestring of the latest entry in the ChangeLog file.
- Return nil if the ChangeLog file cannot be found."
-     (let ((changelog (concat slime-path "ChangeLog")))
-       (if (file-exists-p changelog)
-           (with-temp-buffer 
-             (insert-file-contents-literally changelog nil 0 100)
-             (goto-char (point-min))
-             (symbol-name (read (current-buffer))))
-         nil))))
+     "Return the version of the current slime package
+ Return nil if not installed via package.el."
+     ;; Altered to use package version rather than reading Changelog
+     (when (member 'slime package-activated-list)
+       (number-to-string (first (package-desc-vers 
+                                 (cdr (assq 'slime package-alist))))))))
 
  (defvar slime-protocol-version nil)
  (setq slime-protocol-version
