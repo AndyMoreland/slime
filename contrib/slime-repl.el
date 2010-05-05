@@ -3,6 +3,11 @@
 ;; Original Author: Helmut Eller
 ;; Contributors: to many to mention
 ;; License: GNU GPL (same license as Emacs)
+;; URL: http://common-lisp.net/project/slime/
+;; Version: 20100404
+;; Keywords: languages, lisp, slime
+;; Package-Requires: ((slime "20100404"))
+;; Adapted-by: Phil Hagelberg
 ;;
 ;;; Description:
 ;;
@@ -1915,3 +1920,4 @@ SWANK> " (buffer-string)))))
 	  slime-repl-show-maximum-output)))
 
 (provide 'slime-repl)
+;;; slime-repl.el ends here

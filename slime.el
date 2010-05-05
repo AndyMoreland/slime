@@ -8,6 +8,7 @@
 ;; URL: http://common-lisp.net/project/slime/
 ;; Version: 20100404
 ;; Keywords: languages, lisp, slime
+;; Adapted-by: Phil Hagelberg
 ;;
 ;;
 ;;     For a detailed list of contributors, see the manual.
