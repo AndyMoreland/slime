@@ -6,7 +6,7 @@
 ;;     Copyright (C) 2007,2008,2009  Helmut Eller, Tobias C. Rittweiler
 ;; Authors: Eric Marsden, Luke Gorrie, Helmut Eller, Tobias C. Rittweiler
 ;; URL: http://common-lisp.net/project/slime/
-;; Version: 20091016
+;; Version: 20100404
 ;; Keywords: languages, lisp, slime
 ;;
 ;;
@@ -126,16 +126,11 @@ CONTRIBS is a list of contrib packages to load."
     "Return the datestring of the latest entry in the ChangeLog file.
 Return nil if the ChangeLog file cannot be found."
     (interactive "p")
-    (let ((changelog (concat slime-path "ChangeLog"))
-          (date nil))
-      (when (file-exists-p changelog)
-        (with-temp-buffer 
-          (insert-file-contents-literally changelog nil 0 100)
-          (goto-char (point-min))
-          (setq date (symbol-name (read (current-buffer))))))
-      (when interactivep
-        (message "Slime ChangeLog dates %s." date))
-      date)))
+    (when (member 'slime package-activated-list)
+      (let ((date (number-to-string (first (package-desc-vers 
+                                            (cdr (assq 'slime package-alist)))))))
+        (when interactivep
+          (message "Slime ChangeLog dates %s." date))))))
 
 (defvar slime-protocol-version nil)
 (setq slime-protocol-version
