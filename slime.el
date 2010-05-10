@@ -127,8 +127,9 @@ CONTRIBS is a list of contrib packages to load."
     "Return the datestring of the latest entry in the ChangeLog file.
 Return nil if the ChangeLog file cannot be found."
     (interactive "p")
-    (when (member 'slime package-activated-list)
-      (let ((date (number-to-string (first (package-desc-vers 
+    (when (and (boundp 'package-activated-list)
+               (member 'slime package-activated-list))
+      (let ((date (number-to-string (first (package-desc-vers
                                             (cdr (assq 'slime package-alist)))))))
         (when interactivep
           (message "Slime ChangeLog dates %s." date))))))

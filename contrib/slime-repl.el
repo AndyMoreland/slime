@@ -1633,6 +1633,7 @@ expansion will be added to the REPL's history.)"
   (or (slime-search-buffer-package)
       (slime-lisp-package)))
 
+;;;###autoload
 (defun slime-repl-init ()
   (add-hook 'slime-event-hooks 'slime-repl-event-hook-function)
   (add-hook 'slime-connected-hook 'slime-repl-connected-hook-function)
@@ -1918,6 +1919,9 @@ SWANK> " (buffer-string)))))
 	  slime-repl-write-string
 	  slime-repl-emit
 	  slime-repl-show-maximum-output)))
+
+;;;###autoload
+(add-hook 'slime-load-hook 'slime-repl-init)
 
 (provide 'slime-repl)
 ;;; slime-repl.el ends here
