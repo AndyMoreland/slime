@@ -128,7 +128,8 @@
      "Return the version of the current slime package
  Return nil if not installed via package.el."
      ;; Altered to use package version rather than reading Changelog
-     (when (member 'slime package-activated-list)
+     (when (and (boundp 'package-activated-list)
+                (member 'slime package-activated-list))
        (number-to-string (first (package-desc-vers 
                                  (cdr (assq 'slime package-alist))))))))
 
