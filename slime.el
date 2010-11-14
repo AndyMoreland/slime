@@ -123,15 +123,25 @@
    (set (make-local-variable 'lisp-indent-function)
         'common-lisp-indent-function))
 
- (eval-and-compile
-   (defun slime-changelog-date ()
-     "Return the version of the current slime package
- Return nil if not installed via package.el."
-     ;; Altered to use package version rather than reading Changelog
-     (when (and (boundp 'package-activated-list)
-                (member 'slime package-activated-list))
-       (number-to-string (first (package-desc-vers 
-                                 (cdr (assq 'slime package-alist))))))))
+(eval-and-compile
+  (defun slime-changelog-date ()
+    "Return the version of the current slime package either from ChangeLog
+or from package.el.
+Returns nil if both fails."
+    ;; Altered to use package version rather than reading Changelog
+    (if (and (boundp 'package-activated-list)
+             (member 'slime package-activated-list))
+        ;; Get version from elpa
+        (number-to-string (first (package-desc-vers 
+                                  (cdr (assq 'slime package-alist)))))
+      ;; Fall back to the traditional method
+      (let ((changelog (concat slime-path "ChangeLog")))
+        (if (file-exists-p changelog)
+            (with-temp-buffer 
+              (insert-file-contents-literally changelog nil 0 100)
+              (goto-char (point-min))
+              (symbol-name (read (current-buffer))))
+          nil)))))
 
  (defvar slime-protocol-version nil)
  (setq slime-protocol-version
