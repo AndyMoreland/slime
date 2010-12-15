@@ -132,11 +132,10 @@ Return nil if the ChangeLog file cannot be found."
       (let ((date (number-to-string (first (package-desc-vers
                                             (cdr (assq 'slime package-alist)))))))
         (when interactivep
-          (message "Slime ChangeLog dates %s." date))))))
+          (message "Slime ChangeLog dates %s." date))
+        date))))
 
-(defvar slime-protocol-version nil)
-(setq slime-protocol-version
-      (eval-when-compile (slime-changelog-date)))
+(defvar slime-protocol-version "20100404")
 
 
 ;;;; Customize groups
