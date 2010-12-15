@@ -203,6 +203,9 @@ The default is nil, as this feature can be a security risk."
   :type 'integer
   :group 'slime-lisp)
 
+(put 'slime-lisp-host 'safe-local-variable 'stringp)
+(put 'slime-port 'safe-local-variable 'integerp)
+
 (defvar slime-net-valid-coding-systems
   '((iso-latin-1-unix nil "iso-latin-1-unix")
     (iso-8859-1-unix  nil "iso-latin-1-unix")
